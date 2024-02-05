@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+
+
+     <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700|Raleway:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Fruity shopping Cart</title>
+    <link rel="stylesheet" href="css\shopping cart.css" />
+    <script src="app.js"></script>
+  </head>
+  <body class="sub_page">
+     <div class="hero_area">
+    <div class="hero_area">
+      <!-- header section strats -->
+       <header class="header_section">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="index.html">
+              <img id="friuit1" src="images/friuit1.jpg" alt="fruits image" />
+              <span> Fruity </span>
+            </a>
+            <div class="navbar-collapse" id="">
+              <div class="custom_menu-btn">
+                <button onclick="openNav()">
+                  <span class="s-1"> </span>
+                  <span class="s-2"> </span>
+                  <span class="s-3"> </span>
+                </button>
+              </div>
+              <div id="myNav" class="overlay">
+                <div class="overlay-content">
+                  <a href="index.html">HOME</a>
+                  <a href="about.html">ABOUT</a>
+                  <a href="food.html">Fruits</a>
+                  <a href="garden.html">Gardens</a>
+                  <a href="contact.html">Contact Us</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header> 
+        </div>
+      <!-- end header section -->
+
+      <!-- Shopping Cart-->
+    <div class="container">
+      <header>
+        <h1 class="order">Order product now</h1>
+        <div class="shopping">
+          <img src="img\cart\trolley.png" />
+          <h6>Cart</h6>
+          <span class="quantity">0</span>
+        </div>
+      </header>
+      <div class="list"></div>
+    </div>
+    <div class="card">
+      <h1>Your Cart</h1>
+      <ul class="listCard"></ul>
+      <div class="checkout">
+
+      <a href="checkout.html" target="_blank" rel="noopener noreferrer"><button class="checkout">CheckOut</button>
+      </div>
+      <div class="checkOut"></a>  
+        <div class="total">0</div>
+        <div class="closeShopping">Close</div>
+      </div>
+    </div>
+    <script src="js\shopping cart.js"></script>
+    <br>
+    <!-- end client section -->
+
+    <!-- contact section -->
+    <section class="contact_section layout_padding-bottom">
+      <div class="container">
+        <h2>Free Delivery? Get In touch</h2>
+        <div class="row">
+          <div class="col-md-7">
+            <div class="form_container">
+              <form action="">
+                <input type="text" placeholder="Name" />
+                <input type="text" placeholder="Phone number" />
+                <input type="email" placeholder="Email" />
+                <input
+                  type="text"
+                  placeholder="Message"
+                  class="message_input"
+                />
+                <button>Send</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="contact_box">
+              <a href="">
+                <div class="img-box">
+                  <img src="images/location.png" alt="" />
+                </div>
+                <h6>Gb road 123 Nairobi Kenya</h6>
+              </a>
+              <a href="">
+                <div class="img-box">
+                  <img src="images/call.png" alt="" />
+                </div>
+                <h6>(+254) 768653509</h6>
+              </a>
+              <a href="">
+                <div class="img-box">
+                  <img src="images/envelope.png" alt="" />
+                </div>
+                <h6><span>Contact us</span>(Someone@gmail.com)</h6>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end contact section -->
+
+    <!-- subscribe section -->
+    <section class="subscribe_section">
+      <div class="container">
+        <form action="">
+          <div class="row">
+            <div class="col-lg-3 col-md-4">
+              <label for="subEmail"> Our Newsletter </label>
+            </div>
+            <div class="col-lg-9 col-md-8">
+              <div class="box">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  id="subEmail"
+                />
+                <button>Subscribe</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+<div>
+     <!-- footer section -->
+    <section class="container-fluid footer_section">
+      <div class="social_container">
+        <h4>Follow on</h4>
+        <div class="social-box">
+          <a href="https://www.facebook.com/were.vincente">
+            <img src="images/fb.png" id="facebook" alt="Our facebook page" />
+          </a>
+          <a href="https://twitter.com/Wereouma1">
+            <img src="images/twitter.png" id="twitter" alt="Our twitter Page" />
+          </a>
+          <a href="https://www.linkedin.com/in/were-vincent-a097a4220/">
+            <img
+              src="images/linkedin.png"
+              id="linkedin"
+              alt="Our linkedin Page"
+            />
+          </a>
+          <a href="https://www.youtube.com/channel/UCZpNO4cfryOGcr1p1RHfouA">
+            <img
+              src="images/youtube.png"
+              id="youtube"
+              alt="Our youtube Channel"
+            />
+          </a>
+          <a
+            href="https://wa.me/254768653509 https://www.instagram.com/vincenteoracle/"
+          >
+            <img
+              src="images/instagram.jpg"
+              id="instagram"
+              alt="Our instagram Channel"
+            />
+          </a>
+        </div>
+      </div>
+      <p class="copyright">
+        &copy;Copyright 2023&mdash;<span id="currYear"></span> All Rights Reserved. Design by
+        <a href="https://html.design/">Offmarket Fruits Stores</a>
+      </p>
+    </section>
+    <script>
+      var date = new Date();
+      var year = date.getFullYear();
+      document.getElementById('currYear').innerHTML=year;
+    </script>
+    <!-- footer section -->
+
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    ></script>
+
+    <script>
+      function openNav() {
+        document.getElementById("myNav").classList.toggle("menu_width");
+        document
+          .querySelector(".custom_menu-btn")
+          .classList.toggle("menu_btn-style");
+      }
+    </script>
+
+    <!-- owl carousel script -->
+    <script type="text/javascript">
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 35,
+        navText: [],
+        autoplay: true,
+        autoplayHoverPause: true,
+        responsive: {
+          0: {
+            items: 1,
+          },
+          400: {
+            items: 2,
+          },
+          600: {
+            items: 3,
+          },
+          1000: {
+            items: 4,
+          },
+        },
+      });
+    </script>
+<!--  -->
+
+    <!-- end owl carousel script -->
+    </div>
+  </body>
+</html>
