@@ -214,3 +214,19 @@
     });
 
 })(jQuery);
+
+const addToCartButtons = document.querySelectorAll('.btn-primary');
+const cartItems = document.querySelector('.header__cart .header__cart__items');
+const cartTotal = document.querySelector('.header__cart .header__cart__price span');
+
+addToCartButtons.forEach(function(button) {
+  button.addEventListener('click', function() {
+    // Update the number of items in the cart
+    const currentItems = parseInt(cartItems.textContent);
+    cartItems.textContent = currentItems + 1;
+
+    // Update the total price of the items in the cart
+    const currentTotal = parseFloat(cartTotal.textContent.replace('$', ''));
+    cartTotal.textContent = '$' + (currentTotal + 50).toFixed(2);
+  });
+});
