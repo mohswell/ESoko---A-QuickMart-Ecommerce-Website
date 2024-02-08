@@ -1,99 +1,80 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const products = [
-        { id: 1, price: 25.00, image: 'img/featured/feature-1.jpg' },
-        { id: 2, price: 30.00, image: 'img/featured/feature-2.jpg' },
-        { id: 3, price: 50.00, image: 'img/featured/feature-3.jpg' },
-        { id: 4, price: 40.00, image: 'img/featured/feature-4.jpg' },
-        { id: 5, price: 20.00, image: 'img/featured/feature-5.jpg' },
-        { id: 6, price: 60.00, image: 'img/featured/feature-6.jpg' },
-        { id: 7, price: 35.00, image: 'img/featured/feature-7.jpg' },
-        { id: 8, price: 65.00, image: 'img/featured/feature-8.jpg' }
-        // ... Add details for other products
-    ];
-
+    // Retrieve cart items from local storage or initialize an empty array
     var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     var cartItemsList = document.getElementById('cart-items-list');
-    var subtotalElement = document.getElementById('subtotal');
     var totalElement = document.getElementById('total');
 
-    function updateCart() {
-        var updatedTotal = cartItems.reduce(function (sum, item) {
-            return sum + item.price * item.quantity;
-        }, 0);
-
-        totalElement.textContent = `$${updatedTotal.toFixed(2)}`;
+    // Function to calculate the total price for each item
+    function calculateItemTotal(item) {
+        return item.price * item.quantity;
     }
 
+    // Function to calculate the total price of all items in the cart
+    function calculateTotal() {
+        return cartItems.reduce(function (total, item) {
+            return total + calculateItemTotal(item);
+        }, 0);
+    }
+
+    // Function to render cart items in the table
     function renderCartItems() {
         cartItemsList.innerHTML = '';
-
+        var subtotal = 0;
         cartItems.forEach(function (item) {
+            // Check if any necessary properties are undefined and remove them
+            for (var key in item) {
+                if (item.hasOwnProperty(key) && item[key] === undefined) {
+                    delete item[key];
+                }
+            }
+    
+            // Create a table row for each item
             var row = document.createElement('tr');
-
             row.innerHTML = `
                 <td class="shoping__cart__item">
-                    <img src="${item.image}" alt="${item.id}">
-                    <h5>${item.id}</h5>
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    ${item.name}
                 </td>
-                <td class="shoping__cart__price">
-                    $${item.price.toFixed(2)}
-                </td>
+                <td class="shoping__cart__price">$${item.price.toFixed(2)}</td>
                 <td class="shoping__cart__quantity">
-                    <div class="quantity" data-id="${item.id}">
-                        <div class="pro-qty">
-                            <input type="number" value="${item.quantity}" min="1">
-                        </div>
+                    <div>
+                        <button class="decrement-quantity" data-index="${cartItems.indexOf(item)}">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="increment-quantity" data-index="${cartItems.indexOf(item)}">+</button>
                     </div>
                 </td>
-                <td class="shoping__cart__total">
-                    $${(item.price * item.quantity).toFixed(2)}
-                </td>
-                <td class="shoping__cart__item__close">
-                    <span class="icon_close" data-product-id="${item.id}"></span>
-                </td>
+                <td class="shoping__cart__total">$${calculateItemTotal(item).toFixed(2)}</td>
             `;
             cartItemsList.appendChild(row);
-
-            var quantityInput = row.querySelector('.pro-qty input');
-            quantityInput.addEventListener('change', function () {
-                item.quantity = parseInt(quantityInput.value);
-                localStorage.setItem('cartItems', JSON.stringify(cartItems));
-                updateCart();
-            });
+    
+            // Add item price to subtotal
+            subtotal += calculateItemTotal(item);
         });
+    
+        // Update subtotal and total prices
+        var subtotalElement = document.getElementById('subtotal');
+        var totalElement = document.getElementById('total');
+        subtotalElement.querySelector('span').textContent = `$${subtotal.toFixed(2)}`;
+        totalElement.querySelector('span').textContent = `$${subtotal.toFixed(2)}`;
+    }    
 
-        var closeIcons = cartItemsList.querySelectorAll('.icon_close');
-        closeIcons.forEach(function (icon) {
-            icon.addEventListener('click', function () {
-                var productIdToRemove = icon.getAttribute('data-product-id');
-                var rowToRemove = icon.closest('tr');
-                rowToRemove.remove();
-
-                cartItems = cartItems.filter(function (item) {
-                    return item.id !== parseInt(productIdToRemove);
-                });
-
-                localStorage.setItem('cartItems', JSON.stringify(cartItems));
-                updateCart();
-            });
-        });
-    }
-
-    var updateCartButton = document.getElementById('updateCartButton');
-    if (updateCartButton) {
-        updateCartButton.addEventListener('click', function () {
-            cartItems.forEach(function (item) {
-                var quantityInput = document.querySelector(`.pro-qty[data-id="${item.id}"] input`);
-                if (quantityInput) {
-                    item.quantity = parseInt(quantityInput.value);
-                }
-            });
-
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    // Event listener for incrementing quantity of items in the cart
+    cartItemsList.addEventListener('click', function (event) {
+        if (event.target.classList.contains('increment-quantity')) {
+            var index = parseInt(event.target.getAttribute('data-index'));
+            cartItems[index].quantity++;
+            localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Update cart items in local storage
             renderCartItems();
-        });
-    }
+        } else if (event.target.classList.contains('decrement-quantity')) {
+            var index = parseInt(event.target.getAttribute('data-index'));
+            if (cartItems[index].quantity > 1) {
+                cartItems[index].quantity--;
+                localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Update cart items in local storage
+                renderCartItems();
+            }
+        }
+    });
 
+    // Render cart items when the page loads
     renderCartItems();
-    updateCart();
 });

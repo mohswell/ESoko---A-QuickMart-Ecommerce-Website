@@ -1,0 +1,43 @@
+.add-to-favorites {
+    position: relative;
+    background: none;
+    border: none;
+    padding: 0;
+}
+.add-to-favorites.clicked::after {
+    content: "Added to favorites";
+    position: absolute;
+    top: -40px; /* Adjust position */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    background-color: rgba(255, 0, 0, 0.9); /* Red background */
+    color: white; /* White text */
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0; /* Start with opacity 0 */
+    animation: fadeOut 1s ease forwards, slideUp 1s ease forwards; /* Apply two animations */
+}
+
+.red-heart {
+    color: red !important; /* Change heart color to red */
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        top: 0; /* Start from top */
+    }
+    100% {
+        top: -40px; /* Move up by 40px */
+    }
+}
+

@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the cart icon, count, and total elements
-    var cartIcon = document.getElementById('cart-icon');
+    // Get the cart count and total elements
     var cartCount = document.getElementById('cart-count');
     var cartTotal = document.getElementById('cart-total-price');
-   // var productImage = button.getAttribute('data-product-image');
-
+    var cartItemsList = document.getElementById('cart-items-list'); // Added cart items list
 
     // Initialize the cart items and total from localStorage
     var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -15,14 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
             // Get product details from the button's data attributes
             var productId = button.getAttribute('data-product-id');
+            var productName = button.getAttribute('data-product-name'); // Added product name
             var productPrice = parseFloat(button.getAttribute('data-product-price'));
-            var productImage = button.getAttribute('data-product-image'); // Add this line
-
-            // Check if the product price is a valid number
-            if (isNaN(productPrice)) {
-                console.error('Invalid product price for product ID ' + productId);
-                return;
-            }
+            var productImage = button.getAttribute('data-product-image');
 
             // Check if the product is already in the cart
             var existingItem = cartItems.find(function (item) {
@@ -30,13 +23,13 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             // If the product is already in the cart, update the quantity
-            // Otherwise, add a new item to the cart
             if (existingItem) {
                 existingItem.quantity++;
             } else {
+                // Otherwise, add a new item to the cart
                 cartItems.push({
-                 // You dont need to fetch the product id it becomes repetitive
-                 //   id: productId,
+                    id: productId,
+                    name: productName, // Added product name
                     price: productPrice,
                     quantity: 1,
                     image: productImage
@@ -46,12 +39,11 @@ document.addEventListener('DOMContentLoaded', function () {
             // Update localStorage with the new cart items
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
-            // Update the cart count, total, and price display
+            // Update the cart count, total, and items list display
             updateCart();
         });
     });
 
-    // Function to update the cart count, total, and price display
     function updateCart() {
         // Update the cart count
         var totalCount = cartItems.reduce(function (acc, item) {
@@ -61,12 +53,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Calculate the total price of items in the cart
         var total = cartItems.reduce(function (acc, item) {
-            return acc + item.price * item.quantity;
+            var itemTotal = item.price * item.quantity;
+            return acc + itemTotal;
         }, 0);
 
         // Update the cart total price using the specified ID
         if (cartTotal) {
             cartTotal.textContent = '$' + total.toFixed(2);
         }
+
+        // Update the cart items list display
+        renderCartItems();
     }
+
+    function renderCartItems() {
+        // Clear the previous cart items
+        cartItemsList.innerHTML = '';
+
+        // Render each cart item in the list
+        cartItems.forEach(function (item) {
+            var listItem = document.createElement('li');
+            listItem.textContent = item.name + ' - Quantity: ' + item.quantity + ' - Total: $' + (item.price * item.quantity).toFixed(2);
+            cartItemsList.appendChild(listItem);
+        });
+    }
+
+    // Initial update of the cart
+    updateCart();
 });

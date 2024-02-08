@@ -17,6 +17,102 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+
+    <!-- Start of PHP section -->
+    <?php
+    // Set database connection parameters
+    $servername = "localhost";
+    $username = "root";
+    $password = ""; // Assuming no password for the root user
+    $dbname = "swiss_collection";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Retrieve products from the database
+    $sql = "SELECT * FROM product";
+    $result = $conn->query($sql);
+
+    // Check if there are any products
+    if ($result && $result->num_rows > 0) {
+        // Initialize $products array to store fetched products
+        $products = [];
+
+        // Fetch products and store them in $products array
+        while ($row = $result->fetch_assoc()) {
+            $products[] = $row;
+        }
+
+        // Close the database connection
+        $conn->close();
+    } else {
+        echo "No products found";
+    }
+
+    // Function to get category class based on category ID
+    function getCategoryClass($category_id) {
+        switch ($category_id) {
+            case 1:
+                return "fruits";
+            case 2:
+                return "vegetables";
+            case 3:
+                return "grain";
+            default:
+                return "";
+        }
+    }
+
+    // Function to resize images
+    function resizeImage($imagePath, $maxWidth) {
+        $info = getimagesize($imagePath);
+        $width = $info[0];
+        $height = $info[1];
+        $mime = $info['mime'];
+
+        switch ($mime) {
+            case 'image/jpeg':
+                $image = imagecreatefromjpeg($imagePath);
+                break;
+            case 'image/png':
+                $image = imagecreatefrompng($imagePath);
+                break;
+            default:
+                return $imagePath;
+                break;
+        }
+
+        // Calculate aspect ratio
+        $aspectRatio = $width / $height;
+
+        // Calculate new height based on maxWidth and aspect ratio
+        $newHeight = $maxWidth / $aspectRatio;
+
+        // Create a new image resource with the new dimensions
+        $newImage = imagecreatetruecolor($maxWidth, $newHeight);
+
+        // Resize the image
+        imagecopyresampled($newImage, $image, 0, 0, 0, 0, $maxWidth, $newHeight, $width, $height);
+
+        // Output resized image to a temporary file
+        $tempImagePath = tempnam(sys_get_temp_dir(), 'resized_image');
+        imagejpeg($newImage, $tempImagePath);
+
+        // Free up memory
+        imagedestroy($image);
+        imagedestroy($newImage);
+
+        return $tempImagePath;
+    }
+    ?>
+    <!-- End of PHP section -->
+
 </head>
 
 <body>
@@ -84,7 +180,7 @@
     </div>
     <!-- Humberger End -->
 
-   <!-- Header Section Begin -->
+<!-- Header Section Begin -->
 <header class="header">
     <div class="header__top">
         <div class="container">
@@ -156,7 +252,9 @@
          <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <!-- Favorites icon at the top -->
+                        <li><a id="favorites-icon"><i class="fa fa-heart"></i> <span id="favorites-count">0</span></a></li>
+
                         <!-- Change the href attribute to the shopping cart page -->
                         <!-- Updated cart icon with dynamic content and link -->
                         <li id="cart-icon" class="cart-icon"><a href="shopping-cart.html"><i class="fa fa-shopping-bag"></i> <span id="cart-count">0</span></a></li>
@@ -278,179 +376,45 @@
                     <div class="featured__controls">
                         <ul>
                             <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
+                            <!-- Add more filter options if needed -->
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row featured__filter">
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <!-- Your product button -->
-                                <li class="cart-button">
-                                    <button class="btn btn-primary add-to-cart" data-product-id="1" data-product-price="25.00" data-product-image="img/featured/feature-1.jpg">
-                                        <i class="fa fa-shopping-cart"></i> Add to cart
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <!-- Your product button -->
-                                <li class="cart-button">
-                                    <button class="btn btn-primary add-to-cart" data-product-id="2" data-product-price="30.00" data-product-image="img/featured/feature-2.jpg">
-                                        <i class="fa fa-shopping-cart"></i> Add to cart
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-3.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <!-- Your product button -->
-                                <li class="cart-button">
-                                    <button class="btn btn-primary add-to-cart" data-product-id="3" data-product-price="50.00"  data-product-image="img/featured/feature-3.jpg">
-                                        <i class="fa fa-shopping-cart"></i> Add to cart
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-4.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <!-- Your product button -->
-                                <li class="cart-button">
-                                    <button class="btn btn-primary add-to-cart" data-product-id="4" data-product-price="40.00" data-product-image="img/featured/feature-4.jpg">
-                                        <i class="fa fa-shopping-cart"></i> Add to cart
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <!-- Your product button -->
-                                <li class="cart-button">
-                                    <button class="btn btn-primary add-to-cart" data-product-id="5" data-product-price="20.00" data-product-image="img/featured/feature-5.jpg">
-                                        <i class="fa fa-shopping-cart"></i> Add to cart
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                               <!-- Your product button -->
-                               <li class="cart-button">
-                                <button class="btn btn-primary add-to-cart" data-product-id="6" data-product-price="60.00" data-product-image="img/featured/feature-6.jpg">
-                                    <i class="fa fa-shopping-cart"></i> Add to cart
-                                </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-7.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <!-- Cart button -->
-                                <!-- Your product button -->
-                                <li class="cart-button">
-                                    <button class="btn btn-primary add-to-cart" data-product-id="7" data-product-price="35.00" data-product-image="img/featured/feature-7.jpg">
-                                        <i class="fa fa-shopping-cart"></i> Add to cart
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-8.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <!-- Your product button -->
-                                <li class="cart-button">
-                                    <button class="btn btn-primary add-to-cart" data-product-id="8" data-product-price="65.00" data-product-image="img/featured/feature-8.jpg">
-                                        <i class="fa fa-shopping-cart"></i> Add to cart
-                                    </button>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                // Loop through each product and generate HTML markup
+                if (!empty($products)) {
+                    foreach ($products as $product) {
+                        echo '<div class="col-lg-3 col-md-4 col-sm-6 mix ' . getCategoryClass($product['category_id']) . '">';
+                        echo '<div class="featured__item">';
+                        echo '<div class="featured__item__pic set-bg" data-setbg="' . $product['product_image'] . '">';
+                        echo '<ul class="featured__item__pic__hover">';
+                        echo '<li><a href="#" class="add-to-favorites"><i class="fa fa-heart"></i></a></li>';
+                        echo '<li><a href="#"><i class="fa fa-retweet"></i></a></li>';
+                        echo '<li class="cart-button">';
+                        echo '<button class="btn btn-primary add-to-cart" data-product-id="' . $product['product_id'] . '" data-product-price="' . $product['price'] . '" data-product-image="' . $product['product_image'] . '">';
+                        echo '<i class="fa fa-shopping-cart"></i> Add to cart';
+                        echo '</button>';
+                        echo '</li>';
+                        echo '</ul>';
+                        echo '</div>';
+                        echo '<div class="featured__item__text">';
+                        echo '<h6><a href="#">' . $product['product_name'] . '</a></h6>';
+                        echo '<h5>$' . $product['price'] . '</h5>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                }
+                ?>
             </div>
         </div>
     </section>
     <!-- Featured Section End -->
+
+
+
 
     <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -529,25 +493,69 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/script.js"></script>
-    <!-- JavaScript for search functionality -->
-    <script>
-        function searchProducts() {
-            var input, filter, container, products, item, title, i;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            container = document.getElementById("productsContainer");
-            products = container.getElementsByClassName("featured__item");
 
-            for (i = 0; i < products.length; i++) {
-                item = products[i];
-              title = item.getElementsByTagName("h6")[0];
-                if (title.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    item.style.display = "";
-             } else {
-                    item.style.display = "none";
-             }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the favorites icon element and favorites count element
+            var favoritesIcon = document.getElementById('favorites-icon');
+            var favoritesCountElement = document.getElementById('favorites-count');
+        
+            // Initialize favorites count from localStorage or set to 0 if not present
+            var favoritesCount = parseInt(localStorage.getItem('favoritesCount')) || 0;
+            favoritesCountElement.textContent = favoritesCount;
+        
+            // Check if favoritesCount is greater than 0, set heart color to red
+            if (favoritesCount > 0) {
+                var addToFavoritesButtons = document.querySelectorAll('.add-to-favorites');
+                addToFavoritesButtons.forEach(function(button) {
+                    button.querySelector('i.fa-heart').classList.add('red-heart');
+                });
             }
-         }
+        
+            // Add event listener to the favorites icon
+            favoritesIcon.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+            });
+        
+            // Get all the heart buttons under each product
+            var addToFavoritesButtons = document.querySelectorAll('.add-to-favorites');
+        
+            // Add event listener to each heart button
+            addToFavoritesButtons.forEach(function(button) {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default button behavior
+        
+                    // Check if the click target is the favorites icon or its child elements
+                    if (event.target.closest('#favorites-icon')) {
+                        return; // If so, return and do not increase favorites count
+                    }
+        
+                    // Toggle class to change heart icon color
+                    var heartIcon = button.querySelector('i.fa-heart');
+                    var isRed = heartIcon.classList.toggle('red-heart');
+        
+                    // Increment or decrement the favorites count based on the button state
+                    if (isRed) {
+                        favoritesCount++;
+                    } else {
+                        // Prevent favorites count from going below 0
+                        if (favoritesCount > 0) {
+                            favoritesCount--;
+                        } else {
+                            // If favorites count is already 0, return
+                            return;
+                        }
+                    }
+        
+                    // Update the favorites count element
+                    favoritesCountElement.textContent = favoritesCount;
+        
+                    // Store the updated favorites count in localStorage
+                    localStorage.setItem('favoritesCount', favoritesCount.toString());
+                });
+            });
+        });
+        
     </script>
 
 </body>

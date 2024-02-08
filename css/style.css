@@ -11,6 +11,17 @@ body {
 	font-smoothing: antialiased;
 }
 
+/* CSS styles for resizing the images */
+#cart-items-list img {
+    max-width: 100px; /* Adjust the maximum width as needed */
+    max-height: 100px; /* Adjust the maximum height as needed */
+}
+
+.featured__item__pic {
+	max-width: 100%;
+	height: auto;
+}
+
 h1,
 h2,
 h3,
