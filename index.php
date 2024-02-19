@@ -68,49 +68,8 @@
                 return "";
         }
     }
-
-    // Function to resize images
-    function resizeImage($imagePath, $maxWidth) {
-        $info = getimagesize($imagePath);
-        $width = $info[0];
-        $height = $info[1];
-        $mime = $info['mime'];
-
-        switch ($mime) {
-            case 'image/jpeg':
-                $image = imagecreatefromjpeg($imagePath);
-                break;
-            case 'image/png':
-                $image = imagecreatefrompng($imagePath);
-                break;
-            default:
-                return $imagePath;
-                break;
-        }
-
-        // Calculate aspect ratio
-        $aspectRatio = $width / $height;
-
-        // Calculate new height based on maxWidth and aspect ratio
-        $newHeight = $maxWidth / $aspectRatio;
-
-        // Create a new image resource with the new dimensions
-        $newImage = imagecreatetruecolor($maxWidth, $newHeight);
-
-        // Resize the image
-        imagecopyresampled($newImage, $image, 0, 0, 0, 0, $maxWidth, $newHeight, $width, $height);
-
-        // Output resized image to a temporary file
-        $tempImagePath = tempnam(sys_get_temp_dir(), 'resized_image');
-        imagejpeg($newImage, $tempImagePath);
-
-        // Free up memory
-        imagedestroy($image);
-        imagedestroy($newImage);
-
-        return $tempImagePath;
-    }
     ?>
+    
     <!-- End of PHP section -->
 
 </head>
@@ -393,7 +352,7 @@
                         echo '<li><a href="#" class="add-to-favorites"><i class="fa fa-heart"></i></a></li>';
                         echo '<li><a href="#"><i class="fa fa-retweet"></i></a></li>';
                         echo '<li class="cart-button">';
-                        echo '<button class="btn btn-primary add-to-cart" data-product-id="' . $product['product_id'] . '" data-product-price="' . $product['price'] . '" data-product-image="' . $product['product_image'] . '">';
+                        echo '<button class="btn btn-primary add-to-cart" data-product-id="' . $product['product_id'] . '" data-product-price="' . $product['price'] . '" data-product-name="' . $product['product_name'] . '" data-product-image="' . $product['product_image'] . '">';
                         echo '<i class="fa fa-shopping-cart"></i> Add to cart';
                         echo '</button>';
                         echo '</li>';
@@ -412,9 +371,6 @@
         </div>
     </section>
     <!-- Featured Section End -->
-
-
-
 
     <!-- Footer Section Begin -->
     <footer class="footer spad">

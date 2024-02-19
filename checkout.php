@@ -20,6 +20,12 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+
+
+
+
+
 </head>
 
 <body>
@@ -78,115 +84,114 @@
             </div>
             <div class="checkout__form">
                 <h4>Billing Details</h4>
-                <form action="#">
+                <form id="checkout-form" action="checkout_process.php" method="post">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
-                                        <input type="text">
+                                        <p>First Name<span>*</span></p>
+                                        <input type="text" name="first_name" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Last Name<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="last_name" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
-                                <p>Country<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
-                                <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                                <input type="text" name="address" placeholder="Street Address" class="checkout__input__add" required>
+                                <input type="text" placeholder="Apartment, suite, unit, etc. (optional)" name="apartment">
                             </div>
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="city" required>
                             </div>
                             <div class="checkout__input">
-                                <p>Country/State<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text">
+                                <p>Email Address<span>*</span></p>
+                                <input type="email" name="email" required>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="phone" required>
                                     </div>
                                 </div>
+                                <!-- Use this section to add a form input right next to another input
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
                                         <input type="text">
                                     </div>
                                 </div>
+                                -->
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     Create an account?
-                                    <input type="checkbox" id="acc">
+                                    <input type="checkbox" id="acc" name="create_account">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <p>Create an account by entering the information below. If you are a returning customer
-                                please login at the top of the page</p>
+                            <p>Create an account by entering the information below. If you are a returning customer, please login at the top of the page</p>
                             <div class="checkout__input">
                                 <p>Account Password<span>*</span></p>
-                                <input type="text">
+                                <input type="password" name="password" required>
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="diff-acc">
                                     Ship to a different address?
-                                    <input type="checkbox" id="diff-acc">
+                                    <input type="checkbox" id="diff-acc" name="ship_different_address">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="checkout__input">
                                 <p>Order notes<span>*</span></p>
-                                <input type="text"
-                                    placeholder="Notes about your order, e.g. special notes for delivery.">
+                                <textarea name="order_notes" placeholder="Notes about your order, e.g. special notes for delivery." required></textarea>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
-                                <h4>Your Order</h4>
+                                <!-- Your order summary -->
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul id="order-details-list"></ul>
                                 <div class="checkout__order__subtotal">Subtotal <span id="subtotal">$0.00</span></div>
                                 <div class="checkout__order__total">Total <span id="total">$0.00</span></div>
+                                <!-- Payment methods -->
                                 <div class="checkout__input__checkbox">
-                                    <label for="acc-or">
-                                        Create an account?
-                                        <input type="checkbox" id="acc-or">
+                                    <label for="cash">
+                                        Cash
+                                        <input type="radio" id="cash" name="payment_method" value="Cash">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <div class="checkout__input__checkbox">
-                                    <label for="payment">
-                                        Check Payment
-                                        <input type="checkbox" id="payment">
+                                    <label for="mpesa">
+                                        MPesa
+                                        <input type="radio" id="mpesa" name="payment_method" value="MPesa">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <div class="checkout__input__checkbox">
                                     <label for="paypal">
                                         Paypal
-                                        <input type="checkbox" id="paypal">
+                                        <input type="radio" id="paypal" name="payment_method" value="Paypal">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                                <!-- Hidden input field to store selected payment method and total value -->
+                                <input type="hidden" id="selected_payment_method" name="selected_payment_method">
+                                <input type="hidden" name="total" id="total-value" value="">
+                                <input type="hidden" id="cartItemsInput" name="cartItems">
+                                <!-- Submit button -->
+                                <button type="button" class="site-btn" onclick="submitForm()">PLACE ORDER</button>
+
                             </div>
-                        </div>                        
+                        </div>                     
                     </div>
                 </form>
             </div>
@@ -271,39 +276,22 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Retrieve cart items from local storage or initialize an empty array
-            var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            var orderDetailsList = document.getElementById('order-details-list');
-            var subtotalElement = document.getElementById('subtotal');
-            var totalElement = document.getElementById('total');
-        
-            // Function to render order details
-            function renderOrderDetails() {
-                orderDetailsList.innerHTML = ''; // Clear previous content
-                var subtotal = 0;
-        
-                // Loop through cart items and add them to the order details list
-                cartItems.forEach(function (item) {
-                    var listItem = document.createElement('li');
-                    listItem.textContent = `${item.name} $${(item.price * item.quantity).toFixed(2)}`;
-                    orderDetailsList.appendChild(listItem);
-        
-                    // Add item total to subtotal
-                    subtotal += item.price * item.quantity;
-                });
-        
-                // Update subtotal and total elements
-                subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-                totalElement.textContent = `$${subtotal.toFixed(2)}`;
-            }
-        
-            // Render order details when the page loads
-            renderOrderDetails();
-        });        
+    <script src="js/checkout.js"></script>
 
+    <script>
+        // Function to handle form submission
+        function submitForm() {
+            // Retrieve cart items from session storage
+            var cartItems = JSON.parse(sessionStorage.getItem('cartItems'));
+
+            // Set the value of cartItems input field in the form
+            document.getElementById('cartItemsInput').value = JSON.stringify(cartItems);
+
+            // Submit the form
+            document.getElementById('checkout-form').submit();
+        }
     </script>
+
 
 </body>
 

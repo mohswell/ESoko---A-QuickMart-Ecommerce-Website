@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var cartTotal = document.getElementById('cart-total-price');
     var cartItemsList = document.getElementById('cart-items-list'); // Added cart items list
 
-    // Initialize the cart items and total from localStorage
-    var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    // Initialize the cart items and total from SessionStorage
+    var cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
 
     // Add click event listener to the "Add to cart" buttons
     var addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Otherwise, add a new item to the cart
                 cartItems.push({
                     id: productId,
+                    product_id: productId, // Added product ID
                     name: productName, // Added product name
                     price: productPrice,
                     quantity: 1,
@@ -36,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
 
-            // Update localStorage with the new cart items
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            // Update SessionStorage with the new cart items
+            sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
 
             // Update the cart count, total, and items list display
             updateCart();
