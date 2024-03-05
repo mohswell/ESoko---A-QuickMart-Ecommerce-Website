@@ -93,33 +93,18 @@
         <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
+                                <li>Hello, Welcome to our supermarket</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
-                            <div class="header__top__right__language">
-                                <img src="img/language.png" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
-                            </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <!-- Change the href attribute to the logout page -->
+                                <a href="/Esoko/login/login.php"><i class="fa fa-user"></i>Logout</a>
                             </div>
                         </div>
                     </div>
@@ -136,8 +121,8 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li class="active"><a href="./shop-grid.html">Shop</a></li>
+                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li><a href="./shop-grid.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
@@ -151,15 +136,26 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3">
+
+            <!-- Remember to change this part concerning the cart Mohammed-->
+            <!-- Cart icon at the top of the page -->
+            <!-- Cart icon at the top of the page -->
+            <!-- Cart icon at the top of the page -->
+            
+            <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <!-- Favorites icon at the top -->
+                            <li><a id="favorites-icon"><i class="fa fa-heart"></i> <span id="favorites-count">0</span></a></li>
+
+                            <!-- Change the href attribute to the shopping cart page -->
+                            <!-- Updated cart icon with dynamic content and link -->
+                            <li id="cart-icon" class="cart-icon"><a href="shopping-cart.html"><i class="fa fa-shopping-bag"></i> <span id="cart-count">0</span></a></li>
+                        <!--<li><a href="shopping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li> -->
+                            <li id="cart-total" class="header__cart__price">item: <span id="cart-total-price">$0.00</span></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>
-                </div>
+                </div>   
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>
@@ -756,9 +752,9 @@
                             <a href="./index.html"><img src="img/logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Address: P.O.Box 2361, 00621 Village Market Nairobi</li>
+                            <li>Phone: 0726666900/0726666699</li>
+                            <li>Email: admin@quickmart.com</li>
                         </ul>
                     </div>
                 </div>
@@ -766,20 +762,20 @@
                     <div class="footer__widget">
                         <h6>Useful Links</h6>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
+                            <li><a href="https://quickmart.co.ke/about-us/">About Us</a></li>
+                            <li><a href="https://quickmart.co.ke/returns-policy/">Returns Ploicy</a></li>
+                            <li><a href="https://quickmart.co.ke/corporate-governance/">Corporate Governance</a></li>
+                            <li><a href="https://quickmart.co.ke/supplier-relations/">Supplier Relations</a></li>
+                            <li><a href="https://quickmart.co.ke/corporate-policies/">Corporate Policies</a></li>
+                            <li><a href="https://quickmart.co.ke/branch-network/">Sitemap</a></li>
                         </ul>
                         <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="https://quickmart.co.ke/about-us/">Who We Are</a></li>
+                            <li><a href="https://quickmart.co.ke/community/">Community</a></li>
+                            <li><a href="https://quickmart.co.ke/careers/">Jobs & Careers</a></li>
+                            <li><a href="https://quickmart.co.ke/talk-to-us/">Contact</a></li>
+                            <li><a href="https://quickmart.co.ke/talk-to-us/">Talk to us</a></li>
+                            <li><a href="https://quickmart.co.ke/privacy-policy/">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
@@ -787,15 +783,15 @@
                     <div class="footer__widget">
                         <h6>Join Our Newsletter Now</h6>
                         <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
+                        <form action="controller/subscribe.php" method="post">
+                            <input type="text" name="email" placeholder="Enter your mail">
+                            <button type="submit" class="site-btn" name="subscribe">Subscribe</button>
                         </form>
                         <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                            <a href="https://www.facebook.com/quickmartkenya?_rdc=1&_rdr"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/quickmartkenya/?hl=en"><i class="fa fa-instagram"></i></a>
+                            <a href="https://twitter.com/QuickmartKenya"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.youtube.com/channel/UCqWdqywf4fLaaL5rMP36xFQ?themeRefresh=1"><i class="fa fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>
@@ -803,13 +799,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                        <div class="footer__copyright__text"><p>
                         <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
                     </div>
                 </div>
             </div>
+                .
         </div>
     </footer>
     <!-- Footer Section End -->

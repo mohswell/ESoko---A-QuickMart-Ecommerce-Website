@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Update the cart total price using the specified ID
         if (cartTotal) {
-            cartTotal.textContent = '$' + total.toFixed(2);
+            cartTotal.textContent = 'Ksh' + total.toFixed(2);
         }
 
         // Update the cart items list display
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Render each cart item in the list
         cartItems.forEach(function (item) {
             var listItem = document.createElement('li');
-            listItem.textContent = item.name + ' - Quantity: ' + item.quantity + ' - Total: $' + (item.price * item.quantity).toFixed(2);
+            listItem.textContent = item.name + ' - Quantity: ' + item.quantity + ' - Total: Ksh' + (item.price * item.quantity).toFixed(2);
             cartItemsList.appendChild(listItem);
         });
     }
