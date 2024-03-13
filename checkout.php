@@ -343,11 +343,51 @@
             var total = parseFloat(document.getElementById('total-value').value);
             sessionStorage.setItem('mpesaTotal', total.toFixed(2));
             console.log(total);
-            window.location.href = '../daraja/index.php'; // Redirect to the STK push initiation file
+
+            // Send total to PHP session using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '../daraja/storeTotal.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Redirect to STK push initiation file
+                        window.location.href = '../payment/index.php';
+                    } else {
+                        // Handle error
+                        console.error('Failed to store total in session');
+                    }
+                }
+            };
+            xhr.send('total=' + total.toFixed(2));
         }
     }
     </script>
 
+    <!-- JavaScript code for the handleRedirect function -->
+    <script>
+    $(document).ready(function() {
+        // Function to handle the M-Pesa checkbox
+        function handleMpesaCheckbox() {
+            // Disable all checkboxes
+            $('input[name="payment_method"]').prop('disabled', true);
+            // Enable the M-Pesa checkbox
+            $('#mpesa').prop('disabled', false);
+            // Check the M-Pesa checkbox
+            $('#mpesa').prop('checked', true);
+            // Store the selected payment method in a hidden input field
+            $('#selected_payment_method').val('MPesa');
+        }
+
+        // Check if the M-Pesa payment was successful
+        const urlParams = new URLSearchParams(window.location.search);
+        const mpesaSuccess = urlParams.get('mpesa_success');
+        if (mpesaSuccess === 'true') {
+            // Call the function to handle the M-Pesa checkbox
+            handleMpesaCheckbox();
+        }
+    });
+    </script>
 
     <!-- JavaScript code for handling AJAX request -->
     <script>
