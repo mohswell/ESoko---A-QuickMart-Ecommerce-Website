@@ -34,6 +34,10 @@
         .checkout__input textarea:hover {
             border-color: #ced4da;
         }
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
     </style>
 
 </head>
@@ -83,33 +87,13 @@
     </section>
     <!-- Breadcrumb Section End -->
 
-    <!-- Modal Structure -->
-    <div id="couponModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Enter Coupon Code</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form id="couponForm">
-                        <div class="form-group">
-                            <input type="text" id="couponCode" class="form-control" placeholder="Enter your coupon code">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Apply Coupon</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
             <!-- Trigger for Modal -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#" id="openModal" data-toggle="modal" data-target="#couponModal">Click here</a> to enter your code</h6>
+                    <h6><span class="icon_tag_alt"></span> Enter your details below to proceed with your order</h6>
                 </div>
             </div>
             <div class="checkout__form">
@@ -163,21 +147,11 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <p>If you are a returning customer, please login below here to place your order.</p>
+                            <p>If you are a returning customer, please enter your email address to place your order.</p>
                             <div class="checkout__input">
                                 <p>Email Address<span>*</span></p>
                                 <input type="email" name="email" required>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Account Password<span>*</span></p>
-                                <input type="password" name="password" required>
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Ship to a different address?
-                                    <input type="checkbox" id="diff-acc" name="ship_different_address">
-                                    <span class="checkmark"></span>
-                                </label>
+                                <span id="email-error" class="error-message"></span><br>
                             </div>
                             <div class="checkout__input">
                                 <label class="font-weight-bold">Order notes<span>*</span></label>
@@ -189,13 +163,13 @@
                                 <!-- Your order summary -->
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul id="order-details-list"></ul>
-                                <div class="checkout__order__subtotal" >Subtotal<span id="subtotal">$0.00</span></div>
-                                <div class="checkout__order__discount">Discount <span id="discount" class="text-danger">$0.00</span></div>
-                                <div class="checkout__order__total">Total <span id="total">$0.00</span></div>
+                                <div class="checkout__order__subtotal" >Subtotal<span id="subtotal">Ksh0.00</span></div>
+                                <div class="checkout__order__discount">Discount <span id="discount" class="text-danger">Ksh0.00</span></div>
+                                <div class="checkout__order__total">Total <span id="total">Ksh0.00</span></div>
                                 <!-- Payment methods -->
                                 <div class="checkout__input__checkbox">
                                     <label for="cash">
-                                        Cash
+                                        Cash on Delivery
                                         <input type="radio" id="cash" name="payment_method" value="Cash">
                                         <span class="checkmark"></span>
                                     </label>
@@ -207,13 +181,13 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <div class="checkout__input__checkbox">
+                                <!--<div class="checkout__input__checkbox">
                                     <label for="money">
                                         Money on Delivery
                                         <input type="radio" id="moneyOnDelivery" name="payment_method" value="MoneyOnDelivery">
                                         <span class="checkmark"></span>
                                     </label>
-                                </div>
+                                </div> -->
                                 <!-- Hidden input field to store selected payment method and total value -->
                                 <input type="hidden" id="selected_payment_method" name="selected_payment_method">
                                 <input type="hidden" name="total" id="total-value" value="">
@@ -240,7 +214,7 @@
                         </div>
                         <ul>
                             <li>Address: P.O.Box 2361, 00621 Village Market Nairobi</li>
-                            <li>Phone: +65 11.188.888</li>
+                            <li>Phone: 0726666900/0726666699</li>
                             <li>Email: admin@quickmart.com</li>
                         </ul>
                     </div>
@@ -249,19 +223,19 @@
                     <div class="footer__widget">
                         <h6>Useful Links</h6>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
+                            <li><a href="https://quickmart.co.ke/about-us/">About Us</a></li>
+                            <li><a href="https://quickmart.co.ke/returns-policy/">Returns Ploicy</a></li>
+                            <li><a href="https://quickmart.co.ke/corporate-governance/">Corporate Governance</a></li>
+                            <li><a href="https://quickmart.co.ke/supplier-relations/">Supplier Relations</a></li>
+                            <li><a href="https://quickmart.co.ke/corporate-policies/">Corporate Policies</a></li>
+                            <li><a href="https://quickmart.co.ke/branch-network/">Sitemap</a></li>
                         </ul>
                         <ul>
                             <li><a href="https://quickmart.co.ke/about-us/">Who We Are</a></li>
                             <li><a href="https://quickmart.co.ke/community/">Community</a></li>
                             <li><a href="https://quickmart.co.ke/careers/">Jobs & Careers</a></li>
                             <li><a href="https://quickmart.co.ke/talk-to-us/">Contact</a></li>
-                            <li><a href="https://quickmart.co.ke/branch-network/">Our Location</a></li>
+                            <li><a href="https://quickmart.co.ke/talk-to-us/">Talk to us</a></li>
                             <li><a href="https://quickmart.co.ke/privacy-policy/">Privacy Policy</a></li>
                         </ul>
                     </div>
@@ -270,15 +244,15 @@
                     <div class="footer__widget">
                         <h6>Join Our Newsletter Now</h6>
                         <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
+                        <form action="controller/subscribe.php" method="post">
+                            <input type="text" name="email" placeholder="Enter your mail">
+                            <button type="submit" class="site-btn" name="subscribe">Subscribe</button>
                         </form>
                         <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                            <a href="https://www.facebook.com/quickmartkenya?_rdc=1&_rdr"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/quickmartkenya/?hl=en"><i class="fa fa-instagram"></i></a>
+                            <a href="https://twitter.com/QuickmartKenya"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.youtube.com/channel/UCqWdqywf4fLaaL5rMP36xFQ?themeRefresh=1"><i class="fa fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>
@@ -319,151 +293,161 @@
             // Set the value of cartItems input field in the form
             document.getElementById('cartItemsInput').value = JSON.stringify(cartItems);
 
-            // Get the selected payment method
+            // Update the hidden input field with the selected payment method value
             var selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked');
-            
-            if (!selectedPaymentMethod) {
-                alert('Please select a payment method.');
-                return;
+            if (selectedPaymentMethod) {
+                document.getElementById('selected_payment_method').value = selectedPaymentMethod.value;
             }
 
-            // Update the hidden input field with the selected payment method value
-            document.getElementById('selected_payment_method').value = selectedPaymentMethod.value;
-
-            // Submit the form
-            document.getElementById('checkout-form').submit();
+            // Check if all required fields are filled
+            var form = document.getElementById('checkout-form');
+            if (form.checkValidity()) {
+                // Submit the form
+                form.submit();
+            } else {
+                // If any required fields are empty, show an alert
+                alert('Please fill in all required fields.');
+            }
         }
     </script>
 
-    <!--Javacsript code to initaiate redirect to mpesa folder -->
+    <!-- JavaScript code to initiate redirect to mpesa folder -->
     <script>
-    function handleMpesaCheckbox() {
-        var mpesaCheckbox = document.getElementById('mpesa');
-        if (mpesaCheckbox.checked) {
-            var total = parseFloat(document.getElementById('total-value').value);
-            sessionStorage.setItem('mpesaTotal', total.toFixed(2));
-            console.log(total);
-
-            // Send total to PHP session using AJAX
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '../daraja/storeTotal.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // Redirect to STK push initiation file
-                        window.location.href = '../payment/index.php';
-                    } else {
-                        // Handle error
-                        console.error('Failed to store total in session');
-                    }
+        function handleMpesaCheckbox() {
+            var mpesaCheckbox = document.getElementById('mpesa');
+            // Check if the checkbox is checked and if all required fields are filled
+            if (mpesaCheckbox.checked) {
+                var form = document.getElementById('checkout-form');
+                if (!form.checkValidity()) {
+                    // If any required fields are empty, show an alert and return
+                    alert('Please fill in all required fields.');
+                    mpesaCheckbox.checked = false; // Reset the checkbox
+                    return;
                 }
-            };
-            xhr.send('total=' + total.toFixed(2));
+
+                // If the checkbox is checked and all required fields are filled, proceed with redirection
+                var total = parseFloat(document.getElementById('total-value').value);
+                sessionStorage.setItem('mpesaTotal', total.toFixed(2));
+                console.log(total);
+
+                // Store form data in localStorage before redirecting for payment
+                storeFormData();
+
+                // Send total to PHP session using AJAX
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '../daraja/storeTotal.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // Redirect to STK push initiation file
+                            window.location.href = '../payment/index.php';
+                        } else {
+                            // Handle error
+                            console.error('Failed to store total in session');
+                        }
+                    }
+                };
+                xhr.send('total=' + total.toFixed(2));
+            }
         }
-    }
+
+        // Function to store form data in localStorage
+        function storeFormData() {
+            var formData = {};
+            var form = document.getElementById('checkout-form');
+            for (var i = 0; i < form.elements.length; i++) {
+                var element = form.elements[i];
+                if (element.type !== 'button' && element.type !== 'submit') {
+                    formData[element.name] = element.value;
+                }
+            }
+            localStorage.setItem('formData', JSON.stringify(formData));
+        }
     </script>
 
     <!-- JavaScript code for the handleRedirect function -->
     <script>
-    $(document).ready(function() {
-        // Function to handle the M-Pesa checkbox
-        function handleMpesaCheckbox() {
-            // Disable all checkboxes
-            $('input[name="payment_method"]').prop('disabled', true);
-            // Enable the M-Pesa checkbox
-            $('#mpesa').prop('disabled', false);
-            // Check the M-Pesa checkbox
-            $('#mpesa').prop('checked', true);
-            // Store the selected payment method in a hidden input field
-            $('#selected_payment_method').val('MPesa');
-        }
+        $(document).ready(function() {
+            // Function to handle the M-Pesa checkbox
+            function handleMpesaCheckbox() {
+                // Disable all checkboxes
+                $('input[name="payment_method"]').prop('disabled', true);
+                // Enable the M-Pesa checkbox
+                $('#mpesa').prop('disabled', false);
+                // Check the M-Pesa checkbox
+                $('#mpesa').prop('checked', true);
+                // Store the selected payment method in a hidden input field
+                $('#selected_payment_method').val('MPesa');
+            }
 
-        // Check if the M-Pesa payment was successful
-        const urlParams = new URLSearchParams(window.location.search);
-        const mpesaSuccess = urlParams.get('mpesa_success');
-        if (mpesaSuccess === 'true') {
-            // Call the function to handle the M-Pesa checkbox
-            handleMpesaCheckbox();
-        }
-    });
-    </script>
+            // Check if the M-Pesa payment was successful
+            const urlParams = new URLSearchParams(window.location.search);
+            const mpesaSuccess = urlParams.get('mpesa_success');
+            if (mpesaSuccess === 'true') {
+                // Call the function to handle the M-Pesa checkbox
+                handleMpesaCheckbox();
 
-    <!-- JavaScript code for handling AJAX request -->
-    <script>
-        $(document).ready(function () {
-            // Function to handle form submission
-            $('#couponForm').submit(function (e) {
-                e.preventDefault(); // Prevent the form from submitting normally
-
-                // Get the coupon code from the input field
-                var couponCode = $('#couponCode').val();
-
-                // Send AJAX request to verify_coupon.php
-                $.ajax({
-                    type: 'POST',
-                    url: 'verify_coupon.php',
-                    data: { couponCode: couponCode },
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success) {
-                            // Coupon code is valid, apply discount and update order summary
-                            var discount = response.discount;
-                            populateOrderSummary(discount);
-                            alert('Coupon applied successfully!');
-                        } else {
-                            // Coupon code is invalid, display error message
-                            alert(response.message);
+                // Check if there is any stored form data in localStorage
+                var formData = localStorage.getItem('formData');
+                if (formData) {
+                    // Populate the form fields with stored form data
+                    var parsedFormData = JSON.parse(formData);
+                    for (var key in parsedFormData) {
+                        if (parsedFormData.hasOwnProperty(key)) {
+                            var element = document.querySelector('[name="' + key + '"]');
+                            if (element) {
+                                element.value = parsedFormData[key];
+                            }
                         }
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle error
-                        console.error(xhr.responseText); // Print error message to console
-                        alert('Error occurred while processing the request. Please try again.');
                     }
-                });
-            });
+                }
+            }
         });
     </script>
 
-    <script>
-    // Function to populate the order summary card with cart items and apply discount
-    function populateOrderSummary(discount) {
-        // Retrieve cart items from session storage
-        var cartItems = JSON.parse(sessionStorage.getItem('cartItems'));
+<script>
+// Function to populate the order summary card with cart items and apply discount
+function populateOrderSummary() {
+    // Retrieve cart items from session storage
+    var cartItems = JSON.parse(sessionStorage.getItem('cartItems'));
 
-        // Render cart items in the order summary
-        var orderDetailsList = document.getElementById('order-details-list');
-        orderDetailsList.innerHTML = ''; // Clear existing items
+    // Retrieve discount from session storage
+    var discount = parseFloat(sessionStorage.getItem('discount')) || 0; // Default to 0 if discount is not found
 
-        var subtotal = 0; // Variable to calculate the subtotal amount
+    // Render cart items in the order summary
+    var orderDetailsList = document.getElementById('order-details-list');
+    orderDetailsList.innerHTML = ''; // Clear existing items
 
-        cartItems.forEach(function(item) {
-            var li = document.createElement('li');
-            li.textContent = item.name + ' x ' + item.quantity + ' - $' + item.price.toFixed(2);
-            orderDetailsList.appendChild(li);
+    var subtotal = 0; // Variable to calculate the subtotal amount
 
-            subtotal += item.price * item.quantity; // Update the subtotal amount
-        });
-        // Calculate the discount amount
-        var discountAmount = (subtotal * (discount / 100)).toFixed(2);
+    cartItems.forEach(function(item) {
+        var li = document.createElement('li');
+        li.textContent = item.name + ' x ' + item.quantity + ' - Ksh' + item.price.toFixed(2);
+        orderDetailsList.appendChild(li);
 
-        // Apply discount to the subtotal
-        var total = subtotal - (subtotal * (discount / 100));
+        subtotal += item.price * item.quantity; // Update the subtotal amount
+    });
 
-        // Update the subtotal and total in the order summary
-        document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
-        document.getElementById('discount').textContent = '-$' + discountAmount;
-        document.getElementById('total').textContent = '$' + total.toFixed(2);
+    // Calculate the discount amount
+    var discountAmount = (subtotal * (discount)).toFixed(2);
 
-        // Set the total value in the hidden input field
-        document.getElementById('total-value').value = total.toFixed(2);
-    }
+    // Apply discount to the subtotal
+    var total = subtotal - discountAmount; //
 
-    // Call the function when the page is loaded with an initial discount of 0
-    populateOrderSummary(0);
+    // Update the subtotal, discount, and total in the order summary
+    document.getElementById('subtotal').textContent = 'Ksh' + subtotal.toFixed(2);
+    document.getElementById('discount').textContent = '-Ksh' + discountAmount;
+    document.getElementById('total').textContent = 'Ksh' + total.toFixed(2);
 
-    </script>
+    // Set the total value in the hidden input field
+    document.getElementById('total-value').value = total.toFixed(2);
+}
+
+// Call the function when the page is loaded
+populateOrderSummary();
+
+</script>
 
 </body>
 

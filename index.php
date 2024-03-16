@@ -154,7 +154,6 @@
                 <li><a href="./shopping-cart.html">Shopping Cart</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
-
                     </ul>
                 </li>
             </ul>
@@ -296,7 +295,7 @@
                                 echo '</ul>';
                                 echo '</div>';
                                 echo '<div class="featured__item__text p-4">';
-                                echo '<h6 class="text-lg font-semibold"><a href="#" class="text-gray-800 hover:text-blue-500">' . $product['product_name'] . '</a></h6>';
+                                echo '<h6 class="text-lg font-semibold"><a class="text-gray-800 hover:text-blue-500">' . $product['product_name'] . '</a></h6>';
                                 echo '<h5 class="text-gray-700 font-medium">Ksh ' . $product['price'] . '</h5>';
                                 echo '</div>';
                                 echo '</div>';
@@ -569,6 +568,18 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        // Check if redirected from invoice page with clear_cart=true
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('clear_cart')) {
+            // Clear cart items from session storage
+            sessionStorage.removeItem('cartItems');
+            // Redirect to the homepage without the clear_cart parameter
+            window.location.href = 'index.php';
+            alert("Thank you for shopping with us!");
+        }
     </script>
 
 </body>

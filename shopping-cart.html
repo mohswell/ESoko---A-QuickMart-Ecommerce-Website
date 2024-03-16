@@ -43,7 +43,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="./index.php">Home</a></li>
-                            <li><a href="#">Pages</a>
+                            <li><a>Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shopping-cart.html">Shoping Cart</a></li>
                                     <li><a href="./checkout.php">Check Out</a></li>
@@ -63,7 +63,7 @@
                             <!-- Updated cart icon with dynamic content and link -->
                             <li id="cart-icon" class="cart-icon"><a href="shopping-cart.html"><i class="fa fa-shopping-bag"></i> <span id="cart-count">0</span></a></li>
                         <!--<li><a href="shopping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li> -->
-                            <li id="cart-total" class="header__cart__price">item: <span id="cart-total-price">$0.00</span></li>
+                            <li id="cart-total" class="header__cart__price">item: <span id="cart-total-price">Ksh0.00</span></li>
                         </ul>
                     </div>
                 </div>   
@@ -123,9 +123,9 @@
             </div>
             <div class="col-lg-6 mt-8">
                 <div class="shoping__discount">
-                    <h5 class="mb-4">Discount Codes</h5>
-                    <form action="#" class="flex items-center">
-                        <input type="text" placeholder="Enter your coupon code" class="flex-1 rounded-l-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <h5 class="mb-4">Discount Codes</h5>
+                    <form id="discount-form" class="flex items-center">
+                        <input id="coupon-code" type="text" placeholder="Enter your coupon code" class="flex-1 rounded-l-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <button type="submit" class="site-btn bg-blue-500 text-white px-4 py-2 rounded-r-lg">APPLY COUPON</button>
                     </form>
                 </div>
@@ -134,8 +134,9 @@
                 <div class="shoping__checkout">
                     <h5 class="mb-4">Cart Total</h5>
                     <ul>
-                        <li id="subtotal" class="flex justify-between items-center mb-2">Subtotal <span class="font-semibold">$0.00</span></li>
-                        <li id="total" class="flex justify-between items-center">Total <span class="font-semibold">$0.00</span></li>
+                        <li id="subtotal" class="flex justify-between items-center mb-2">Subtotal <span class="font-semibold">Ksh0.00</span></li>
+                        <li id="discount" class="flex justify-between items-center mb-2">Discount <span class="font-semibold">Ksh0.00</span></li>
+                        <li id="total" class="flex justify-between items-center">Total <span class="font-semibold">Ksh0.00</span></li>
                     </ul>
                     <a href="./checkout.php" class="primary-btn mt-4 block w-full text-center">PROCEED TO CHECKOUT</a>
                 </div>
@@ -224,7 +225,6 @@
     <script src="js/main.js"></script>
     <script src="js/script.js"></script>
     <script src = "js/shopping-cart.js"></script>
-
 
 </body>
 
