@@ -18,7 +18,7 @@ app.post('/subscribe', async (req, res) => {
         service: 'gmail',
         auth: {
             user: 'moddySaido2018@gmail.com',
-            pass: 'Mamobadrus10',
+            pass: 'nopassword',
         },
     });
 
